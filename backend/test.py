@@ -3,8 +3,9 @@ from fastapi import Cookie, Depends, FastAPI, HTTPException, Request, Response
 from fastapi import security
 from fastapi.middleware.cors import CORSMiddleware
 import csv
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 import json
+from fastapi.staticfiles import StaticFiles
 from starlette.status import HTTP_401_UNAUTHORIZED
 
 from fastapi.security import HTTPBasic, HTTPBasicCredentials, OAuth2PasswordRequestForm
@@ -27,7 +28,7 @@ app.add_middleware(
 
 def get_data():
     data = []
-    with open('c:/Projects/PythonDev/aicreations/project_1/sample.csv', 'r') as file:
+    with open('./backend/sample.csv', 'r') as file:
         reader = csv.reader(file)
         next(reader)  # Skip the first row
         for row in reader:
@@ -43,9 +44,9 @@ def get_data():
 
 
 
-@app.get('/')
-def hello():
-    return 'Hello, World!'
+# @app.get('/')
+# def hello():
+#     return 'Hello, World!'
 
 # @app.post('/login')
 # def login(request: Request, response: Response):
@@ -92,6 +93,14 @@ def login(response: Response, form_data: OAuth2PasswordRequestForm = Depends()):
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+# Register the StaticFiles middleware
+app.mount("/", StaticFiles(directory="./aicrxn/build/", html=True), name="ReactApp")
+
+# Serve the React app bundle
+@app.get("/")
+async def index():
+  return FileResponse("./aicrxn/build/index.html")
 
 if __name__ == '__main__':
     import uvicorn

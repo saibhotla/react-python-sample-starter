@@ -1,6 +1,7 @@
  import React, { useState, useEffect, useContext, createContext } from 'react';
  import { useDispatch, useSelector } from 'react-redux';
  import { setUser, clearUser } from '../../reducers/userSlice';
+ import { apiUrl } from '../../apiConstants';
  const fakeAuth = {
   onAuthStateChanged: (callback) => {
     // Simulate user authentication state change
@@ -48,7 +49,7 @@ function AuthProvider({ children }) {
     formData.append('username', email);
     formData.append('password', password);
 
-    return fetch('http://localhost:8000/login', {
+    return fetch(apiUrl+'/login', {
       method: 'POST',
       // headers: {
       //   'Content-Type': 'application/x-www-form-urlencoded'
@@ -75,7 +76,7 @@ function AuthProvider({ children }) {
 
 
   const logout = () => {
-    return fetch('http://localhost:8000/logout', {
+    return fetch(apiUrl+'/logout', {
       method: 'POST',
       credentials: 'include'
     })

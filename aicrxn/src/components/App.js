@@ -3,6 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import '@ag-grid-community/styles/ag-grid.css';
 import '@ag-grid-community/styles/ag-theme-alpine.css';
 import { useAuth } from './login/AuthProvider';
+import { apiUrl } from '../apiConstants';
 
 function App() {
   const { logout } = useAuth();
@@ -17,7 +18,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8000/rows')
+    fetch(apiUrl+'/rows')
       .then(response => response.json())
       .then(data => {
         const convertedData = data.map(item => ({
