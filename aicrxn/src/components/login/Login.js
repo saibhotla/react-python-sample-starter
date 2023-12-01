@@ -17,9 +17,6 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     login(email, password)
-      .then(() => {
-        navigate('/');
-      })
       .catch((error) => {
         console.error(error);
         // Handle login error
