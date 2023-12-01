@@ -1,10 +1,10 @@
 
-import { createStore } from 'redux';
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from '../reducers/userSlice';
 
-const initialState = {
-    loggedin: false
-};
-
-const store = createStore(initialState);
-
-export default store;
+export default configureStore({
+  reducer: {
+    user: userReducer,
+  },
+});

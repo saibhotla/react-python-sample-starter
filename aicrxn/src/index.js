@@ -6,11 +6,15 @@ import { AuthProvider, useAuth } from './components/login/AuthProvider';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Login from './components/login/Login';
-import rootReducer from './reducers/rootReducer';
-import { createStore } from 'redux';
+import  userReducer  from './reducers/userSlice';
+import { configureStore } from '@reduxjs/toolkit';
 import App from './components/App';
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+  },
+});
 
 function ProtectedRoute({ children }) {
   const { currentUser } = useAuth();
