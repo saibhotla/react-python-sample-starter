@@ -1,17 +1,18 @@
-# react-python-sample-starter
-Project with react and a python generator
 
-## [Without Docker] Installation:
-#### cd ./backend
-#### pip install -r requirements. txt
+# React Python Sample Starter
 
-#### cd ./aicrxn
-#### npm run build
+This project is a starter template for a web application built with React and a Python generator.
 
-### To Start (react is statically served):
-#### python ./backend/test.py
+## Installation (without Docker)
 
-## [With docker]
-##### docker-compose build --no-cache
+1. Navigate to the `backend` directory: `cd ./backend`
+2. Install the Python dependencies: `pip install -r requirements.txt`
+3. Navigate to the `aicrxn` directory: `cd ./aicrxn`
+4. Build the React application: `npm run build`
+5. Start the application (React is statically served): `python ./backend/test.py`
 
-##### docker-compose up -d
+## Installation (with Docker)
+
+1. Build the Docker containers: `docker-compose build --no-cache`
+2. Start the Docker containers: `docker-compose up -d`
+
